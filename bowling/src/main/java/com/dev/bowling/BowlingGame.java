@@ -5,7 +5,7 @@ public class BowlingGame {
 	private int currentRoll=0;
 	private static int ZERO_SCORE =0;
 	private static int MAX_FRAMES=10;
-	private static int MAX_PINS_FRAME=10;
+	private static int MAX_PINS_IN_FRAME=10;
 	
 	public void roll(int pins) {
 		rolls[currentRoll++]=pins;
@@ -15,13 +15,13 @@ public class BowlingGame {
 		int score = ZERO_SCORE;
 	    int frameIndex = 0;
 	    for (int frame = 0; frame < MAX_FRAMES ; frame++) {
-	    	if (rolls[frameIndex] == MAX_PINS_FRAME)
+	    	if (isStrike(frameIndex))
 	        {
-	          score += MAX_PINS_FRAME +rolls[frameIndex+1] +rolls[frameIndex+2];
+	          score += MAX_PINS_IN_FRAME +rolls[frameIndex+1] +rolls[frameIndex+2];
 	          frameIndex++;
 	        }else if (isSpare(frameIndex))
 	        {
-		        score += MAX_PINS_FRAME + rolls[frameIndex + 2];
+		        score += MAX_PINS_IN_FRAME + rolls[frameIndex + 2];
 		        frameIndex += 2;
 	        } else {
 	        score += rolls[frameIndex] + rolls[frameIndex + 1];
@@ -32,6 +32,9 @@ public class BowlingGame {
 	  }
 	
 	  private boolean isSpare(int frameIndex) {
-		    return rolls[frameIndex] +rolls[frameIndex + 1] == MAX_PINS_FRAME;
+		    return rolls[frameIndex] +rolls[frameIndex + 1] == MAX_PINS_IN_FRAME;
+	  }
+	  private boolean isStrike(int frameIndex) {
+		    return rolls[frameIndex] == MAX_PINS_IN_FRAME;
 	  }
 }

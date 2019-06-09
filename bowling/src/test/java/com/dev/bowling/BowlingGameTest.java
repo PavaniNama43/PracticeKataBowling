@@ -50,11 +50,22 @@ public class BowlingGameTest {
 	
 	@Test
 	public void testGameScoreWhenOneStrikeInGame(){
-		game.roll(10);
+		rollStrike();
 		game.roll(5);
 		game.roll(3);
 		rollPins(16,2);
 		
 		assertEquals(58, game.calculateScore());
 	}
+	
+	private void rollStrike() {
+		  game.roll(10);
+	}
+	
+	@Test
+	public void testPerfectGame() {
+		rollPins(12,10);
+	    assertEquals(300, game.calculateScore());
+	  }
+
 }
