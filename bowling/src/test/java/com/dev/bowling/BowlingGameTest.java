@@ -36,11 +36,16 @@ public class BowlingGameTest {
 	
 	@Test
 	public void testGameScoreWhenOneSpareInGame(){
-		game.roll(2);
-		game.roll(8);
+		rollSpare();
 		game.roll(5);
 		rollPins(17,2);
 		
 		assertEquals(54, game.calculateScore());
 	}
+	
+	  private void rollSpare() {
+		  game.roll(2);
+		  game.roll(8);
+		  }
+
 }
