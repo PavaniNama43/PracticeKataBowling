@@ -43,9 +43,18 @@ public class BowlingGameTest {
 		assertEquals(54, game.calculateScore());
 	}
 	
-	  private void rollSpare() {
+	private void rollSpare() {
 		  game.roll(2);
 		  game.roll(8);
-		  }
-
+	}
+	
+	@Test
+	public void testGameScoreWhenOneStrikeInGame(){
+		game.roll(10);
+		game.roll(5);
+		game.roll(3);
+		rollPins(16,2);
+		
+		assertEquals(58, game.calculateScore());
+	}
 }
