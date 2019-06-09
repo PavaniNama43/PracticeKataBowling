@@ -1,29 +1,46 @@
 package com.dev.bowling;
 
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
 import org.junit.Test;
 
 public class BowlingGameTest {
-
+	private BowlingGame game;
+	
+	@Before
+	public void setUp() {
+		 game = new BowlingGame();
+	}
+	
+	private void rollPins(int roll,int pins) {
+		for(int i=0;i<roll;i++) {
+			game.roll(pins);
+		}
+	}
+	
 	@Test
 	public void testGameScoreForGutterBalls() {
-		BowlingGame game= new BowlingGame();
 		
-		for(int i=0;i<20;i++) {
-			game.roll(0);
-		}
+		rollPins(20,0);
 		
-		assertEquals(0, game.getScore());
+		assertEquals(0, game.calculateScore());
 	}
 	
 	@Test
 	public void testGameScoreWhenTwoPinsDownPerRoll() {
-		BowlingGame game= new BowlingGame();
+		rollPins(20,2);
 		
-		for(int i=0;i<20;i++) {
-			game.roll(2);
-		}
+		assertEquals(40, game.calculateScore());
+	}
+	
+	@Test
+	public void testGameScoreWhenOneSpareInGame(){
+		game.roll(2);
+		game.roll(8);
+		game.roll(5);
+		rollPins(17,2);
 		
-		assertEquals(40, game.getScore());
+		assertEquals(54, game.calculateScore());
 	}
 }
